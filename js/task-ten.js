@@ -8,7 +8,7 @@ const refs = {
 };
 
 let number = 0;
-const box = [];
+
 
 refs.input.addEventListener("input", onGetNumber);
 refs.buttonCreate.addEventListener("click", createBoxes);
@@ -16,7 +16,11 @@ refs.buttonDestroy.addEventListener("click", destroyBoxex);
 
 
 function onGetNumber(e) {
-    number = e.currentTarget.value;
+    number = Number(e.currentTarget.value);
+
+    if (isNaN(number) || number <= 0) {
+        alert("Необходимо ввести число и число больше 0")
+    };
 };
 
 
@@ -30,19 +34,14 @@ function createBoxes() {
         element.style.backgroundColor = getRandomHexColor();
         element.style.width = `${width += 10}px`;
         element.style.height = `${height += 10}px`;
-       
-        box.push(element);
+    
+        refs.divEl.append(element);
     };
-
-    refs.divEl.append(...box);
-
-    console.log(box)
 };
 
 
 function destroyBoxex() {
     refs.divEl.innerHTML = "";
     refs.input.value = "";
-    box.length = 0;
 };
 
